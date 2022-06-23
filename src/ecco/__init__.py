@@ -77,11 +77,17 @@ def from_pretrained(hf_model_id: str,
         model_cls = AutoModelForSeq2SeqLM
     elif config['type'] == 'causal':
         model_cls = AutoModelForCausalLM
-    else:
+    elif config['type'] == 'seq':
+        model_cls = AutoModelForSequenceClassification
+        config['type'] == 'mlm
+    else:    
         model_cls = AutoModel
 
-    model = model_cls.from_pretrained(hf_model_id, output_hidden_states=hidden_states, output_attentions=attention)
-
+    if config['trust_remote_code']:
+        model = model_cls.from_pretrained(hf_model_id, output_hidden_states=hidden_states, output_attentions=attention,trust_remote_code=config['trust_remote_code'])
+    else:
+        model = model_cls.from_pretrained(hf_model_id, output_hidden_states=hidden_states, output_attentions=attention)
+    
     lm_kwargs = {
         'model_name': hf_model_id,
         'config': config,
