@@ -14,7 +14,7 @@ Usage:
 
 __version__ = '0.1.2'
 from ecco.lm import LM
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel, AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel, AutoModelForSeq2SeqLM,AutoModelForSequenceClassification
 from typing import Any, Dict, Optional, List
 from ecco.util import load_config, pack_tokenizer_config
 
