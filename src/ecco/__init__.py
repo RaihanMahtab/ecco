@@ -79,7 +79,7 @@ def from_pretrained(hf_model_id: str,
         model_cls = AutoModelForCausalLM
     elif config['type'] == 'seq':
         model_cls = AutoModelForSequenceClassification
-        config['type'] == 'mlm
+        config['type'] == 'mlm'
     else:    
         model_cls = AutoModel
 
