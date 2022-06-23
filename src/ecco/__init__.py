@@ -14,7 +14,7 @@ Usage:
 
 __version__ = '0.1.2'
 from ecco.lm import LM
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel, AutoModelForSeq2SeqLM,AutoModelForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel, AutoModelForSeq2SeqLM
 from typing import Any, Dict, Optional, List
 from ecco.util import load_config, pack_tokenizer_config
 
@@ -77,16 +77,10 @@ def from_pretrained(hf_model_id: str,
         model_cls = AutoModelForSeq2SeqLM
     elif config['type'] == 'causal':
         model_cls = AutoModelForCausalLM
-    elif config['type'] == 'seq':
-        model_cls = AutoModelForSequenceClassification
-        config['type'] == 'mlm'
     else:    
         model_cls = AutoModel
 
-    if config['trust_remote_code']:
-        model = model_cls.from_pretrained(hf_model_id, output_hidden_states=hidden_states, output_attentions=attention,trust_remote_code=config['trust_remote_code'])
-    else:
-        model = model_cls.from_pretrained(hf_model_id, output_hidden_states=hidden_states, output_attentions=attention)
+    model = model_cls.from_pretrained(hf_model_id, output_hidden_states=hidden_states, output_attentions=attention,trust_remote_code=config['trust_remote_code'])
     
     lm_kwargs = {
         'model_name': hf_model_id,
